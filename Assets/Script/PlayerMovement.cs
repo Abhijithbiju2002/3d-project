@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
 
     bool canJump = true;
     bool isGrounded;
+    bool hasControl = true;
 
     float ySpeed;
     Quaternion TargetRotation;
@@ -31,6 +32,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+
+
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
 
@@ -38,6 +41,8 @@ public class PlayerMovement : MonoBehaviour
 
         var moveInput = (new Vector3(h, 0, v)).normalized;
         var moveDirection = cameraController.PlanarRotation * moveInput;
+
+
 
         //for sprinting
         bool shiftHeld = Input.GetKey(KeyCode.LeftShift);
@@ -51,6 +56,7 @@ public class PlayerMovement : MonoBehaviour
         moveSpeed = isRunning ? 8f : 2f;
         animator.SetBool("isRunning", isRunning);
 
+        if (!hasControl) return;
 
         GroundCheck();
         animator.SetBool("isGrounded", isGrounded);
@@ -91,11 +97,26 @@ public class PlayerMovement : MonoBehaviour
     {
         isGrounded = Physics.CheckSphere(transform.TransformPoint(groundCheckOffset), groundCheckRadius, groundLayer);
     }
+    public void SetControl(bool hasControl)
+    {
+        this.hasControl = hasControl;
+        characterController.enabled = hasControl;
+
+        if (!hasControl)
+        {
+            animator.SetFloat("MoveAmount", 0f);
+            TargetRotation = transform.rotation;
+        }
+    }
     private IEnumerator JumpCoolDownRoutine()
     {//jump cooldown
         canJump = false;
         yield return new WaitForSeconds(jumpCoolDown);
         canJump = true;
+    }
+    public bool IsGrounded()
+    {
+        return isGrounded;
     }
 
     private void OnDrawGizmosSelected()

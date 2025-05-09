@@ -2,35 +2,32 @@ using UnityEngine;
 
 public class EnvironmentChecker : MonoBehaviour
 {
-    public Vector3 rayOffset = new Vector3(0, 0.2f, 0);
-    public float rayLength = 0.9f;
-    public float heightRayLength = 6f;
-    public LayerMask obstacleLayer;
+    [SerializeField] Vector3 forwardRayOffset = new Vector3(0, 0.25f, 0);
+    [SerializeField] float ForwardRayLength = 0.8f;
+    [SerializeField] LayerMask obstacleLayer;
 
-    public ObstacleInfo CheckObstacle()
+    public ObstacleHitData CheckObstacle()
     {
-        var hitData = new ObstacleInfo();
-        var rayOrigin = transform.position + rayOffset;
+        var hitData = new ObstacleHitData();
 
-        hitData.hitFound = Physics.Raycast(rayOrigin, transform.forward, out hitData.hitInfo, rayLength, obstacleLayer);
+        var forwardOrigin = transform.position + forwardRayOffset;
+        hitData.forwardHitFound = Physics.Raycast(transform.position + forwardRayOffset, transform.forward,
+          out hitData.forwadHit, ForwardRayLength, obstacleLayer);//this line gives the foeward raycast
 
-        Debug.DrawRay(rayOrigin, transform.forward * rayLength, (hitData.hitFound) ? Color.red : Color.green);
 
-        if (hitData.hitFound)//checking if the hit the obstacle then draw line from bottom to top from(hitdata.hitfound)
-        {
-            var heightOrigin = hitData.hitInfo.point + Vector3.up * heightRayLength;
-            hitData.heightHitFound = Physics.Raycast(heightOrigin, Vector3.down, out hitData.heightInfo, heightRayLength, obstacleLayer);
+        Debug.DrawRay(forwardOrigin, transform.forward * ForwardRayLength, (hitData.forwardHitFound) ? Color.red : Color.green);
 
-            Debug.DrawRay(heightOrigin, Vector3.down * heightRayLength, (hitData.heightHitFound) ? Color.blue : Color.green);
-        }
         return hitData;
     }
+
+
+}
+public struct ObstacleHitData
+{
+    public bool forwardHitFound;
+    public RaycastHit forwadHit;
 }
 
-public struct ObstacleInfo
-{
-    public bool hitFound;
-    public bool heightHitFound;
-    public RaycastHit hitInfo;
-    public RaycastHit heightInfo;
-}
+
+
+

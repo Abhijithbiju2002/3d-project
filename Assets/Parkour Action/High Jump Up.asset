@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: High Jump Up
   m_EditorClassIdentifier: 
   animationName: Hight Jump
-  minimumHeight: 1
-  maximumHeight: 1.5
+  minimumHeight: 0.5
+  maximumHeight: 1

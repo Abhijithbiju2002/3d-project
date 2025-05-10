@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9a028171b4ad7a4db09fe5b7b324ff9, type: 3}
-  m_Name: High Jump Up
+  m_Name: JumpUp
   m_EditorClassIdentifier: 
-  animationName: Hight Jump
-  minimumHeight: 0.5
-  maximumHeight: 1
+  animName: JumpUp
+  minHeight: 0
+  maxHeight: 0

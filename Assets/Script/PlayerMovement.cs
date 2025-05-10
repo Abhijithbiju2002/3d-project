@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
         var moveInput = (new Vector3(h, 0, v)).normalized;
         var moveDirection = cameraController.PlanarRotation * moveInput;
 
-
+        if (!hasControl) return;
 
         //for sprinting
         bool shiftHeld = Input.GetKey(KeyCode.LeftShift);
@@ -56,7 +56,7 @@ public class PlayerMovement : MonoBehaviour
         moveSpeed = isRunning ? 8f : 2f;
         animator.SetBool("isRunning", isRunning);
 
-        if (!hasControl) return;
+
 
         GroundCheck();
         animator.SetBool("isGrounded", isGrounded);
@@ -114,14 +114,11 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(jumpCoolDown);
         canJump = true;
     }
-    public bool IsGrounded()
-    {
-        return isGrounded;
-    }
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawSphere(transform.TransformPoint(groundCheckOffset), groundCheckRadius);
     }
+    public float RotationSpeed => rotation_speed;
 }

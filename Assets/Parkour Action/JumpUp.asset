@@ -13,5 +13,10 @@ MonoBehaviour:
   m_Name: JumpUp
   m_EditorClassIdentifier: 
   animName: JumpUp
-  minHeight: 0
-  maxHeight: 0
+  minHeight: 0.8
+  maxHeight: 1.5
+  rotateToObstacle: 1
+  enableTargetMaching: 1
+  matchBodyPart: 3
+  matchStartTime: 0.15
+  matchTargetTime: 0.4

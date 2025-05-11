@@ -1890,6 +1890,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96b3887570389e64cbe3c7f5c8405e5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parkourActions:
+  - {fileID: 11400000, guid: fc4cb047f0a62cd4aa7308bb2b0563c6, type: 2}
+  - {fileID: 11400000, guid: 3f0f8536a2d81814c81dd368055bf103, type: 2}
 --- !u!114 &1895578684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1903,7 +1906,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forwardRayOffset: {x: 0, y: 0.25, z: 0}
-  ForwardRayLength: 0.8
+  ForwardRayLength: 1.2
+  heightRayLength: 5
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 64

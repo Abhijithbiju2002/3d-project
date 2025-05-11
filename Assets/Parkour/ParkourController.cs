@@ -70,11 +70,23 @@ public class ParkourController : MonoBehaviour
                     playerMovement.RotationSpeed * Time.deltaTime);
 
             }
+            if (action.EnableTargetMaching)
+            {
+                MatchTarget(action);
+            }
             yield return null;
         }
 
         playerMovement.SetControl(true);
         inAction = false;
 
+    }
+
+    void MatchTarget(NewParkourAction action)
+    {
+        if (animator.isMatchingTarget) return;
+
+        animator.MatchTarget(action.MatchPos, transform.rotation, action.MatchBodyPart,
+            new MatchTargetWeightMask(new Vector3(0, 1, 0), 0), action.MatchStartTime, action.MatchTargetTime);
     }
 }

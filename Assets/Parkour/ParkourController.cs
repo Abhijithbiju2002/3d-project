@@ -45,22 +45,28 @@ public class ParkourController : MonoBehaviour
     }
     IEnumerator DoParkourAction(NewParkourAction action)
     {
+
         inAction = true;
         playerMovement.SetControl(false);
 
         animator.CrossFade(action.AnimName, 0.2f);
-        yield return null;
+        while (!animator.GetCurrentAnimatorStateInfo(0).IsName(action.AnimName))
+            yield return null;
+
+        //  yield return null;
+
 
         var animState = animator.GetNextAnimatorStateInfo(0);
-        if (!animState.IsName(action.AnimName))
-        {
-            Debug.LogError("the parkour Animation is wrong!");
-        }
+        // if (!animState.IsName(action.AnimName))
+        //{
+        //    Debug.LogError("the parkour Animation is wrong!");
+        // }
 
         //yield return new WaitForSeconds(animState.length); before //this code waits for the length of the animation
-
+        float animLength = animState.length;
         float timer = 0f;
-        while (timer <= animState.length) //this code waits for the length of the animation
+        bool matched = false;
+        while (timer <= animLength) //this code waits for the length of the animation
         {
             timer += Time.deltaTime;
 
@@ -70,13 +76,13 @@ public class ParkourController : MonoBehaviour
                     playerMovement.RotationSpeed * Time.deltaTime);
 
             }
-            if (action.EnableTargetMaching)
+            if (action.EnableTargetMaching && !matched && timer >= animLength * action.MatchStartTime)
             {
                 MatchTarget(action);
+                matched = true;
             }
             yield return null;
         }
-
         playerMovement.SetControl(true);
         inAction = false;
 

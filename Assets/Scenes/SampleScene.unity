@@ -621,13 +621,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   followTarget: {fileID: 1895578680}
-  Cam_distance: 5
   RotationSpeed: 2
   minVerticalAngle: -10
   maxVerticalAngle: 45
   FramingOffset: {x: 0, y: 2}
   invertX: 0
   invertY: 0
+  sprintCamDistance: 7
+  walkCamDistance: 5
+  zoomLerpSpeed: 2.66
 --- !u!1 &1134167864
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,7 +12,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float gravity = -9.81f;
     [SerializeField] float jumpCoolDown = 1f;
 
+
     bool canJump = true;
+    bool canSprint = true;
     bool isGrounded;
     bool hasControl = true;
 
@@ -47,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
         //for sprinting
         bool shiftHeld = Input.GetKey(KeyCode.LeftShift);
         bool isMoving = moveAmount > 0f;
-        bool isRunning = shiftHeld && isMoving;
+        bool isRunning = shiftHeld && isMoving && canSprint;
 
         //walking
         moveSpeed = isMoving ? 2f : 0f;
@@ -55,7 +57,6 @@ public class PlayerMovement : MonoBehaviour
         //sprint
         moveSpeed = isRunning ? 8f : 2f;
         animator.SetBool("isRunning", isRunning);
-
 
 
         GroundCheck();

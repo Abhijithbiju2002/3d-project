@@ -3,7 +3,7 @@ using UnityEngine;
 public class CameraFollow1 : MonoBehaviour
 {
     [SerializeField] Transform followTarget;
-    [SerializeField] float Cam_distance = 5f;
+    // [SerializeField] float Cam_distance = 5f;
     [SerializeField] float RotationSpeed = 1f;
 
     float y_rotation;
@@ -17,6 +17,13 @@ public class CameraFollow1 : MonoBehaviour
     [SerializeField] bool invertX;
     [SerializeField] bool invertY;
 
+    [SerializeField] float sprintCamDistance = 7f;
+    [SerializeField] float walkCamDistance = 5f;
+    [SerializeField] float zoomLerpSpeed = 5f;
+
+    float currentCamDistance;
+
+
     float invertXVal;
     float invertYVal;
 
@@ -24,10 +31,17 @@ public class CameraFollow1 : MonoBehaviour
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        currentCamDistance = walkCamDistance;
     }
 
     void Update()
     {
+        bool isSprinting = Input.GetKey(KeyCode.LeftShift) &&
+              (Mathf.Abs(Input.GetAxis("Vertical")) > 0.1f || Mathf.Abs(Input.GetAxis("Horizontal")) > 0.1f);//sprint
+
+        float targetDistance = isSprinting ? sprintCamDistance : walkCamDistance;//if sprinting 
+        currentCamDistance = Mathf.Lerp(currentCamDistance, targetDistance, Time.deltaTime * zoomLerpSpeed);//Smooth camera distance change
+
         invertXVal = (invertX) ? -1 : 1;
         invertYVal = (invertY) ? -1 : 1;
 
@@ -39,7 +53,7 @@ public class CameraFollow1 : MonoBehaviour
         var targetRotation = Quaternion.Euler(x_rotation, y_rotation, 0);
         var focusPosition = followTarget.position + new Vector3(FramingOffset.x, FramingOffset.y); //cam focus to player at start
 
-        transform.position = focusPosition - targetRotation * new Vector3(0, 0, Cam_distance);
+        transform.position = focusPosition - targetRotation * new Vector3(0, 0, currentCamDistance);
         transform.rotation = targetRotation;
 
     }

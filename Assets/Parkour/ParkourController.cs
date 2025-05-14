@@ -95,4 +95,8 @@ public class ParkourController : MonoBehaviour
         animator.MatchTarget(action.MatchPos, transform.rotation, action.MatchBodyPart,
             new MatchTargetWeightMask(new Vector3(0, 1, 0), 0), action.MatchStartTime, action.MatchTargetTime);
     }
+    public bool IsClimbing()
+    {
+        return inAction == true;
+    }
 }

@@ -627,9 +627,10 @@ MonoBehaviour:
   FramingOffset: {x: 0, y: 2}
   invertX: 0
   invertY: 0
-  sprintCamDistance: 7
-  walkCamDistance: 5
-  zoomLerpSpeed: 2.66
+  sprintCamDistance: 6.75
+  walkCamDistance: 4
+  zoomLerpSpeed: 0.75
+  controllerParkour: {fileID: 1895578683}
 --- !u!1 &1134167864
 GameObject:
   m_ObjectHideFlags: 0

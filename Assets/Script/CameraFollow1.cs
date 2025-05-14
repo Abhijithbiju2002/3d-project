@@ -21,25 +21,41 @@ public class CameraFollow1 : MonoBehaviour
     [SerializeField] float walkCamDistance = 5f;
     [SerializeField] float zoomLerpSpeed = 5f;
 
+    [SerializeField] float climbVerticalAngle = 15f;
+    [SerializeField] float climbCamDistance = 6f;
+
     float currentCamDistance;
 
 
     float invertXVal;
     float invertYVal;
 
+    [SerializeField] ParkourController controllerParkour;
     private void Start()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         currentCamDistance = walkCamDistance;
+
     }
 
     void Update()
     {
         bool isSprinting = Input.GetKey(KeyCode.LeftShift) &&
               (Mathf.Abs(Input.GetAxis("Vertical")) > 0.1f || Mathf.Abs(Input.GetAxis("Horizontal")) > 0.1f);//sprint
+        bool isClimbing = Input.GetKey(KeyCode.LeftAlt) && controllerParkour.IsClimbing();//for climbing
 
-        float targetDistance = isSprinting ? sprintCamDistance : walkCamDistance;//if sprinting 
+        float targetDistance = walkCamDistance;
+        if (isSprinting)
+        {
+            targetDistance = sprintCamDistance;//if sprint switch to sprint cam distance
+        }
+        else if (controllerParkour != null && controllerParkour.IsClimbing())
+        {
+            targetDistance = climbCamDistance;//if climbing switch to climb cam distance
+            x_rotation = Mathf.Lerp(x_rotation, climbVerticalAngle, Time.deltaTime * zoomLerpSpeed);
+        }
+        // float targetDistance = isSprinting ? sprintCamDistance : walkCamDistance;//if sprinting 
         currentCamDistance = Mathf.Lerp(currentCamDistance, targetDistance, Time.deltaTime * zoomLerpSpeed);//Smooth camera distance change
 
         invertXVal = (invertX) ? -1 : 1;

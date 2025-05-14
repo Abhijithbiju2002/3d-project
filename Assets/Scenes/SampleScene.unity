@@ -624,12 +624,14 @@ MonoBehaviour:
   RotationSpeed: 2
   minVerticalAngle: -10
   maxVerticalAngle: 45
-  FramingOffset: {x: 0, y: 2}
+  FramingOffset: {x: 0, y: 1.75}
   invertX: 0
   invertY: 0
-  sprintCamDistance: 6.75
-  walkCamDistance: 4
+  sprintCamDistance: 5.75
+  walkCamDistance: 3.25
   zoomLerpSpeed: 0.75
+  climbVerticalAngle: 4
+  climbCamDistance: 10
   controllerParkour: {fileID: 1895578683}
 --- !u!1 &1134167864
 GameObject:
@@ -1896,6 +1898,7 @@ MonoBehaviour:
   parkourActions:
   - {fileID: 11400000, guid: fc4cb047f0a62cd4aa7308bb2b0563c6, type: 2}
   - {fileID: 11400000, guid: 3f0f8536a2d81814c81dd368055bf103, type: 2}
+  - {fileID: 11400000, guid: 978402d1b29d977419c960a1bc3009ff, type: 2}
 --- !u!114 &1895578684
 MonoBehaviour:
   m_ObjectHideFlags: 0

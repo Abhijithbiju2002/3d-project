@@ -81,11 +81,15 @@ public class ParkourController : MonoBehaviour
                 MatchTarget(action);
                 matched = true;
             }
+            if (animator.IsInTransition(0) && timer > 0.5f) break;
+
             yield return null;
         }
         yield return new WaitForSeconds(action.PostActionDelay);
+        playerMovement.BlockSprintUntilShift();
         playerMovement.SetControl(true);
         inAction = false;
+
 
     }
 

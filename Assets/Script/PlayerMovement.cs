@@ -12,6 +12,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float gravity = -9.81f;
     [SerializeField] float jumpCoolDown = 1f;
 
+    private bool sprintBlockedUntilShiftReleased = false;
+
 
     bool canJump = true;
     bool canSprint = true;
@@ -49,6 +51,15 @@ public class PlayerMovement : MonoBehaviour
         //for sprinting
         bool shiftHeld = Input.GetKey(KeyCode.LeftShift);
         bool isMoving = moveAmount > 0f;
+
+        if (sprintBlockedUntilShiftReleased)
+        {
+            if (!shiftHeld)
+            {
+                sprintBlockedUntilShiftReleased = false;
+            }
+            shiftHeld = false;
+        }
         bool isRunning = shiftHeld && isMoving && canSprint;
 
         //walking
@@ -120,6 +131,10 @@ public class PlayerMovement : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawSphere(transform.TransformPoint(groundCheckOffset), groundCheckRadius);
+    }
+    public void BlockSprintUntilShift()
+    {
+        sprintBlockedUntilShiftReleased = true;
     }
     public float RotationSpeed => rotation_speed;
 }

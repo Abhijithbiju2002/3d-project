@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: ClimbUpWall
   m_EditorClassIdentifier: 
   animName: WallClimb
+  ObstacleTag: 
   minHeight: 1.5
   maxHeight: 2.5
   rotateToObstacle: 1
   postActionDelay: 0.4
   enableTargetMaching: 1
   matchBodyPart: 5
-  matchStartTime: 0.08
+  matchStartTime: 0
   matchTargetTime: 0.3
   matchPosWeigth: {x: 0, y: 1, z: 1}

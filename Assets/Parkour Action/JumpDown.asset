@@ -10,16 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9a028171b4ad7a4db09fe5b7b324ff9, type: 3}
-  m_Name: VaultFence
+  m_Name: JumpDown
   m_EditorClassIdentifier: 
-  animName: VaultFence
-  ObstacleTag: Fence
-  minHeight: 0.8
-  maxHeight: 1.2
-  rotateToObstacle: 1
+  animName: 
+  ObstacleTag: 
+  minHeight: 0
+  maxHeight: 0
+  rotateToObstacle: 0
   postActionDelay: 0
   enableTargetMaching: 1
-  matchBodyPart: 4
-  matchStartTime: 0.2
-  matchTargetTime: 0.36
-  matchPosWeigth: {x: 0, y: 1, z: 1}
+  matchBodyPart: 0
+  matchStartTime: 0
+  matchTargetTime: 0
+  matchPosWeigth: {x: 0, y: 1, z: 0}
+  UseHeigthCheck: 0
+  MinHeight: 0
+  MaxHeight: 0

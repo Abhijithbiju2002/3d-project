@@ -50,23 +50,19 @@ public class ParkourController : MonoBehaviour
         playerMovement.SetControl(false);
 
         animator.CrossFade(action.AnimName, 0.2f);
-        while (!animator.GetCurrentAnimatorStateInfo(0).IsName(action.AnimName))
-            yield return null;
-
-        //  yield return null;
-
+        // 1.  while (!animator.GetCurrentAnimatorStateInfo(0).IsName(action.AnimName))
+        yield return null;
 
         var animState = animator.GetNextAnimatorStateInfo(0);
-        // if (!animState.IsName(action.AnimName))
-        //{
-        //    Debug.LogError("the parkour Animation is wrong!");
-        // }
+        if (!animState.IsName(action.AnimName))
+        {
+            Debug.LogError("the parkour Animation is wrong!");
+        }
 
-        //yield return new WaitForSeconds(animState.length); before //this code waits for the length of the animation
-        float animLength = animState.length;
+        // 2.float animLength = animState.length;
         float timer = 0f;
-        bool matched = false;
-        while (timer <= animLength) //this code waits for the length of the animation
+        // 3.bool matched = false;
+        while (timer <= animState.length) //this code waits for the length of the animation
         {
             timer += Time.deltaTime;
 
@@ -76,16 +72,17 @@ public class ParkourController : MonoBehaviour
                     playerMovement.RotationSpeed * Time.deltaTime);
 
             }
-            if (action.EnableTargetMaching && !matched && timer >= animLength * action.MatchStartTime)
+            if (action.EnableTargetMaching)// 4. && !matched && timer >= animLength * action.MatchStartTime)
             {
                 MatchTarget(action);
-                matched = true;
+                //5.matched = true;
             }
             if (animator.IsInTransition(0) && timer > 0.5f) break;
 
             yield return null;
         }
         yield return new WaitForSeconds(action.PostActionDelay);
+
         playerMovement.BlockSprintUntilShift();
         playerMovement.SetControl(true);
         inAction = false;

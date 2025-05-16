@@ -104,6 +104,7 @@ public class PlayerMovement : MonoBehaviour
             rotation_speed * Time.deltaTime);
 
         animator.SetFloat("MoveAmount", moveAmount, 0.2f, Time.deltaTime);
+
     }
     void GroundCheck()
     {
@@ -137,4 +138,5 @@ public class PlayerMovement : MonoBehaviour
         sprintBlockedUntilShiftReleased = true;
     }
     public float RotationSpeed => rotation_speed;
+
 }

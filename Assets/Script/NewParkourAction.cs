@@ -19,6 +19,11 @@ public class NewParkourAction : ScriptableObject
     [SerializeField] float matchTargetTime;
     [SerializeField] Vector3 matchPosWeigth = new Vector3(0, 1, 0);
 
+    //[Header("Height Requirement")]
+    //[SerializeField] bool UseHeigthCheck = false;
+    //[SerializeField] float MinHeight;
+    //[SerializeField] float MaxHeight;
+
     public Quaternion TargetRotation { get; set; }
     public Vector3 MatchPos { get; set; }
 
@@ -38,6 +43,7 @@ public class NewParkourAction : ScriptableObject
 
         if (enableTargetMaching)
             MatchPos = hitData.heightHit.point;
+
 
         return true;
     }

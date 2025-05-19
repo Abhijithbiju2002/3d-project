@@ -14,6 +14,9 @@ public class PlayerMovement : MonoBehaviour
 
     private bool sprintBlockedUntilShiftReleased = false;
 
+    public EnvironmentChecker environmentChecker;
+
+    public bool playerOnLedge { get; set; }
 
     bool canJump = true;
     bool canSprint = true;
@@ -76,6 +79,12 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded)
         {
             ySpeed = -0.5f;
+            playerOnLedge = environmentChecker.CheckLedge(moveDirection);
+            if (playerOnLedge)
+            {
+                Debug.Log("player is on ledge");
+            }
+
             if (Input.GetButtonDown("Jump") && isMoving && canJump)//for Jump
             {
                 animator.SetTrigger("Jump");
